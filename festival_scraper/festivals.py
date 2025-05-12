@@ -3,30 +3,68 @@ import requests as rs
 
 
 #TESTING TESTING
+def error_msg():
+    print("Invalid Input.")
+    exit()
 
 def noct():
 
- #1) grab website html
-    nocturnal = rs.get('https://nocturnal.frontgatetickets.com/event/0jy7rh4vqbmp83ov').text
+ #1) grab website htmls
+    nocturnal_GA = rs.get('https://nocturnal.frontgatetickets.com/event/0jy7rh4vqbmp83ov').text #grab website link for GA admission
     #print(nocturnal)  # prints out html file 
+    soup1 = bs(nocturnal_GA, 'lxml')
 
-    soup = bs(nocturnal, 'lxml')
-    #print(soup.prettify())
-    tags = soup.find_all('div', class_='ticket-price-section')
-    
-    prices = []
+    nocturnal_VIP = rs.get('https://nocturnal.frontgatetickets.com/event/d4ekm6gn25yxhav0').text #grab website link for VIP admission
+    soup2 = bs(nocturnal_VIP, 'lxml')
 
-    for x in tags:
-        name = x.get('data-eventname')
-        price = float(x.get('data-price'))
+    print("What kind of Tickets? (Select 1 or 2) ")
+    print("1) GA")
+    print("2) VIP")
+    print("3 Camping Options")
+    selection = int(input("Selection: "))
 
-        prices.append(price)
+    if(selection == 1):  # display GA options and prices 
+        print(selection, "was selected. Directing to GA options...")
+      
+        #print(soup.prettify())
+        tags1 = soup1.find_all('div', class_='ticket-price-section')
+        
+        prices = []
 
-    GA_reg = min(prices)
-    GA_sticker = max(prices)
+        # loop over tags in GA section 
+        for x in tags1:
+            #name = x.get('data-eventname') we don't really need this 
+            price = float(x.get('data-price'))
 
-    print("The current price for GA is: ", GA_reg)
-    print("The current price for GA with the magnet is: ", GA_sticker)
+            prices.append(price)
+
+        GA_reg = min(prices)
+        GA_sticker = max(prices)
+
+        print("The current price for GA is: ", GA_reg)
+        print("The current price for GA with the magnet is: ", GA_sticker)
+    elif(selection ==2):
+        print(selection, "was selected. Directing you to VIP prices...")
+        #print (soup2.prettify()) testing purposes 
+        prices = []
+        tags = soup2.find_all('div', class_='ticket-price-section')
+        for y in tags:
+            
+            price = float(y.get('data-price'))
+            prices.append(price)
+
+        VIP_reg = min(prices)
+        VIP_magnet = max(prices)
+
+        print("The price for VIP is: ", VIP_reg)
+        print("The price of VIP with the magnet is: ", VIP_magnet)
+
+    elif(selection ==3):
+        print("It works")    
+    else:
+        error_msg()
+
+   
 
 
 def hardSummer():
@@ -53,7 +91,8 @@ def hardSummer():
 def main():
 
     print("It's alive!!")
-    hardSummer()
+    #hardSummer()
+    noct()
 
 
 
