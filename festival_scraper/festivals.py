@@ -62,13 +62,9 @@ def noct():
     elif(selection ==3):
         print("It works")    
     else:
-        error_msg()
-
-   
-
+        error_msg()  
 
 def hardSummer():
-
 
     hard_summer = rs.get('https://hardsummer.frontgatetickets.com/event/nk2gp605pj48u9hw?utm_source=hsmf&utm_medium=saturday_ga&_gl=1*130yp9t*_gcl_au*ODM4MTY2OTY4LjE3NDY4NDExNjQ.*_ga*MTE5MDIxOTIxMC4xNzQ2ODQxMTY1*_ga_J0N9LSSK1L*czE3NDY4NDExNjQkbzEkZzEkdDE3NDY4NDEyNDMkajYwJGwwJGgw').text
     #print(hard_summer)
@@ -91,8 +87,19 @@ def hardSummer():
 def main():
 
     print("It's alive!!")
-    #hardSummer()
-    noct()
+
+    print("Select festival: ")
+    print("(1) Noctural wonderland")
+    print("(2) HARD Summer")
+
+    festival_choice = int(input("Choice: "))
+
+    if(festival_choice == 1):
+        noct()
+    elif(festival_choice == 2):
+        hardSummer()
+    else:
+        error_msg()
 
 
 
