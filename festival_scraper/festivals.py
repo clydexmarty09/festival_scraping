@@ -17,10 +17,13 @@ def noct():
     nocturnal_VIP = rs.get('https://nocturnal.frontgatetickets.com/event/d4ekm6gn25yxhav0').text #grab website link for VIP admission
     soup2 = bs(nocturnal_VIP, 'lxml')
 
+    camping = rs.get('https://nocturnal.frontgatetickets.com/event/e2i910hiqcxfo47c').text  #grab the website for the camping passes
+    soup3 = bs(camping, 'lxml')
+
     print("What kind of Tickets? (Select 1 or 2) ")
-    print("1) GA")
-    print("2) VIP")
-    print("3 Camping Options")
+    print("(1) GA")
+    print("(2) VIP")
+    print("(3) Camping Options")
     selection = int(input("Selection: "))
 
     if(selection == 1):  # display GA options and prices 
@@ -59,8 +62,18 @@ def noct():
         print("The price for VIP is: ", VIP_reg)
         print("The price of VIP with the magnet is: ", VIP_magnet)
 
-    elif(selection ==3):
-        print("It works")    
+    elif(selection ==3): # this is for camping tickets 
+        #print("It works")    
+        print(selection, "was selected. Directing you to camping prices...")
+        tags_title = soup3.find_all('div', class_='ticket-price-section')
+
+        names = []
+        for z in tags_title: 
+            name = z.get('data-eventname')
+            names.append(name)
+        
+        print(names[0]) 
+
     else:
         error_msg()  
 
