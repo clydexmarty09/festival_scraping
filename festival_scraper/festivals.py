@@ -26,6 +26,9 @@ def noct():
     print("(3) Camping Options")
     selection = int(input("Selection: "))
 
+    # declare some boolean variable for while program running 
+    running = True   
+
     if(selection == 1):  # display GA options and prices 
         print(selection, "was selected. Directing to GA options...")
       
@@ -68,7 +71,8 @@ def noct():
         print("The price of VIP with the magnet is: ", VIP_magnet)
 
 
-    # NOTE: CAMPING OPTIONS DO NOT WORK 
+    # NOTE: CAMPING OPTIONS DO NOT WORK
+         
     elif(selection ==3): # this is for camping tickets 
         #print("It works")    
         print(selection, "was selected. Directing you to camping prices...")
@@ -84,7 +88,7 @@ def noct():
 
             print(price)
 
-        # more tests ------------------------------------------------
+        # end more tests ------------------------------------------------
 
         names = []
         for z in tags_title: 
@@ -100,6 +104,8 @@ def noct():
 
     else:
         error_msg()  
+
+    # --------------- we would end the while here ------------------
 
 def hardSummer():
 
@@ -124,19 +130,26 @@ def hardSummer():
 def main():
 
     print("It's alive!!")
-
-    print("Select festival: ")
+    print("Select festival, or press 0 to exit: ")
     print("(1) Noctural wonderland")
     print("(2) HARD Summer")
 
-    festival_choice = int(input("Choice: "))
+    running = True 
 
-    if(festival_choice == 1):
-        noct()
-    elif(festival_choice == 2):
-        hardSummer()
-    else:
-        error_msg()
+    while(running):
+        festival_choice = int(input("Choice: "))
+        # Start a while loop to keep selecting stuff 
+        if(festival_choice == 0): 
+            running = False
+        elif(festival_choice == 1):
+            noct()
+        elif(festival_choice == 2):
+            hardSummer()
+        else:
+            print("Invalid input. Please try again.")
+            #error_msg()
+            
+    # ----------------- end while loop here  -----------------
 
 
 
