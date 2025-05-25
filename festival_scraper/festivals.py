@@ -80,7 +80,7 @@ def noct():
         prices = []
         for p in price:
             price = p.get('data-price')
-            prices.append(p)
+            prices.append(price)
 
             print(price)
 
@@ -89,8 +89,14 @@ def noct():
         names = []
         for z in tags_title: 
             name = z.get('data-name')
-           # names.append(name)
-            print(name.strip())  # strip() trims the whitespace 
+            names.append(name)
+            #print(name.strip())  # strip() trims the whitespace 
+
+        # Match corresponding name with price. Let's use a dictionary (USE ZIP)
+        names_prices = dict(zip(names, prices))
+        for n, p in names_prices.items():  # loop over the items 
+            print(f"{n}:{p}")  # prints pairs of names and prices
+
 
     else:
         error_msg()  
