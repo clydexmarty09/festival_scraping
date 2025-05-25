@@ -88,9 +88,9 @@ def noct():
 
         names = []
         for z in tags_title: 
-            name = z.get('data-eventname')
-            names.append(name)
-            print(names)  
+            name = z.get('data-name')
+           # names.append(name)
+            print(name.strip())  # strip() trims the whitespace 
 
     else:
         error_msg()  
