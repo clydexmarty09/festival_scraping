@@ -46,7 +46,9 @@ def noct():
 
         print("The current price for GA is: ", GA_reg)
         print("The current price for GA with the magnet is: ", GA_sticker)
-    elif(selection ==2):
+
+    elif(selection ==2): # this takes use VIP options 
+
         print(selection, "was selected. Directing you to VIP prices...")
         #print (soup2.prettify()) testing purposes 
         prices = []
@@ -56,23 +58,39 @@ def noct():
             price = float(y.get('data-price'))
             prices.append(price)
 
+	# lines below takes the minimuma and maximum of both prices
         VIP_reg = min(prices)
         VIP_magnet = max(prices)
+
+        print(prices) # prints the list containing the prices for testing purposes
 
         print("The price for VIP is: ", VIP_reg)
         print("The price of VIP with the magnet is: ", VIP_magnet)
 
+
+    # NOTE: CAMPING OPTIONS DO NOT WORK 
     elif(selection ==3): # this is for camping tickets 
         #print("It works")    
         print(selection, "was selected. Directing you to camping prices...")
         tags_title = soup3.find_all('div', class_='ticket-price-section')
+        
+        # this line is for testing purposes -----------------------
+        price = soup3.find_all('div', class_= 'ticket-price-section')
+
+        prices = []
+        for p in price:
+            price = p.get('data-price')
+            prices.append(p)
+
+            print(price)
+
+        # more tests ------------------------------------------------
 
         names = []
         for z in tags_title: 
             name = z.get('data-eventname')
             names.append(name)
-        
-        print(names[0]) 
+            print(names)  
 
     else:
         error_msg()  
