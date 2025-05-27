@@ -6,9 +6,10 @@ import requests as rs
 
 def exit_command(): # if the user decides to exit 
 
+    print("Exiting...")
     exit()
 
-def error_msg():
+def error_msg():  # call this function for bad inputs 
     
     print("Invalid Input.")
 
@@ -30,19 +31,17 @@ def noct():
     print("(2) VIP")
     print("(3) Camping Options")
    
-
     # declare some boolean variable for while program running 
     running = True   
 
     # declare some while loop to keep selecting options 
     while (running): # keep looping until the user decides to exit
 
-        selection = int(input("Selection: "))
+        selection = int(input("Press 1 for GA, 2 for VIP, 3 for camping options, or 0 to exit"))
         
         if (selection == 0): #exit command 
 
-            print("Exiting...")
-            exit(0)
+            exit_command()
 
         elif(selection == 1):  # display GA options and prices 
             
@@ -116,6 +115,14 @@ def noct():
 
         else:
             error_msg()  
+        
+        # lines below keep looping if the user wants to stay in the same menus 
+        back = input("Go Back? Y/N: ")
+        back == back.upper()
+        if(back == 'Y'): 
+            print("Going back...")
+            break
+        elif(back == 'N'): continue
 
     # --------------- we would end the while here ------------------
 
