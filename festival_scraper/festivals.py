@@ -37,7 +37,7 @@ def noct():
     # declare some while loop to keep selecting options 
     while (running): # keep looping until the user decides to exit
 
-        selection = int(input("Press 1 for GA, 2 for VIP, 3 for camping options, or 0 to exit"))
+        selection = int(input("Press 1 for GA, 2 for VIP, 3 for camping options, or 0 to exit: "))
         
         if (selection == 0): #exit command 
 
@@ -80,7 +80,7 @@ def noct():
             VIP_reg = min(prices)
             VIP_magnet = max(prices)
 
-            print(prices) # prints the list containing the prices for testing purposes
+            #print(prices) # prints the list containing the prices for testing purposes
 
             print("The price for VIP is: ", VIP_reg)
             print("The price of VIP with the magnet is: ", VIP_magnet)
@@ -98,7 +98,7 @@ def noct():
                 price = p.get('data-price')
                 prices.append(price)
 
-                print(price)
+                #print(price)
 
             # end more tests ------------------------------------------------
 
@@ -149,24 +149,33 @@ def hardSummer():
 def main():
 
     print("It's alive!!")
-    print("Select festival, or press 0 to exit: ")
-    print("(1) Noctural wonderland")
-    print("(2) HARD Summer")
-
     running = True 
 
     while(running):
-        festival_choice = int(input("Choice: "))
+        #festival_choice = int(input("Choice: "))
         # Start a while loop to keep selecting stuff 
+        user_input = input("Select (0) to exit, (1) for Nocturnal, (2) for HARD Summer: ")
+       
+        # try -> except for error checking 
+        try: 
+            
+            festival_choice = int(user_input)
+        
+        except ValueError:  # input was not expected (int)
+            
+            error_msg()
+            continue  # go back to top of the loop 
+
         if(festival_choice == 0): 
             running = False
+            exit_command()
+       
         elif(festival_choice == 1):
             noct()
         elif(festival_choice == 2):
             hardSummer()
         else:
-            print("Invalid input. Please try again.")
-            #error_msg()
+            error_msg()
             
     # ----------------- end while loop here  -----------------
 
