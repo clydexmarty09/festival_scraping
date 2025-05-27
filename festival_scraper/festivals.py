@@ -3,9 +3,14 @@ import requests as rs
 
 
 #TESTING TESTING
-def error_msg():
-    print("Invalid Input.")
+
+def exit_command(): # if the user decides to exit 
+
     exit()
+
+def error_msg():
+    
+    print("Invalid Input.")
 
 def noct():
 
@@ -24,86 +29,93 @@ def noct():
     print("(1) GA")
     print("(2) VIP")
     print("(3) Camping Options")
-    selection = int(input("Selection: "))
+   
 
     # declare some boolean variable for while program running 
     running = True   
 
-    if(selection == 1):  # display GA options and prices 
-        print(selection, "was selected. Directing to GA options...")
-      
-        #print(soup.prettify())
-        tags1 = soup1.find_all('div', class_='ticket-price-section')
+    # declare some while loop to keep selecting options 
+    while (running): # keep looping until the user decides to exit
+
+        selection = int(input("Selection: "))
         
-        prices = []
+        if (selection == 0): #exit command 
 
-        # loop over tags in GA section 
-        for x in tags1:
-            #name = x.get('data-eventname') we don't really need this 
-            price = float(x.get('data-price'))
+            print("Exiting...")
+            exit(0)
 
-            prices.append(price)
-
-        GA_reg = min(prices)
-        GA_sticker = max(prices)
-
-        print("The current price for GA is: ", GA_reg)
-        print("The current price for GA with the magnet is: ", GA_sticker)
-
-    elif(selection ==2): # this takes use VIP options 
-
-        print(selection, "was selected. Directing you to VIP prices...")
-        #print (soup2.prettify()) testing purposes 
-        prices = []
-        tags = soup2.find_all('div', class_='ticket-price-section')
-        for y in tags:
+        elif(selection == 1):  # display GA options and prices 
             
-            price = float(y.get('data-price'))
-            prices.append(price)
-
-	# lines below takes the minimuma and maximum of both prices
-        VIP_reg = min(prices)
-        VIP_magnet = max(prices)
-
-        print(prices) # prints the list containing the prices for testing purposes
-
-        print("The price for VIP is: ", VIP_reg)
-        print("The price of VIP with the magnet is: ", VIP_magnet)
-
-
-    # NOTE: CAMPING OPTIONS DO NOT WORK
-         
-    elif(selection ==3): # this is for camping tickets 
-        #print("It works")    
-        print(selection, "was selected. Directing you to camping prices...")
-        tags_title = soup3.find_all('div', class_='ticket-price-section')
+            print(selection, "was selected. Directing to GA options...")
         
-        # this line is for testing purposes -----------------------
-        price = soup3.find_all('div', class_= 'ticket-price-section')
+            #print(soup.prettify())
+            tags1 = soup1.find_all('div', class_='ticket-price-section')
+            
+            prices = []
 
-        prices = []
-        for p in price:
-            price = p.get('data-price')
-            prices.append(price)
+            # loop over tags in GA section 
+            for x in tags1:
+                #name = x.get('data-eventname') we don't really need this 
+                price = float(x.get('data-price'))
 
-            print(price)
+                prices.append(price)
 
-        # end more tests ------------------------------------------------
+            GA_reg = min(prices)
+            GA_sticker = max(prices)
 
-        names = []
-        for z in tags_title: 
-            name = z.get('data-name')
-            names.append(name)
-            #print(name.strip())  # strip() trims the whitespace 
+            print("The current price for GA is: ", GA_reg)
+            print("The current price for GA with the magnet is: ", GA_sticker)
 
-        # Match corresponding name with price. Let's use a dictionary (USE ZIP)
-        names_prices = dict(zip(names, prices))
-        for n, p in names_prices.items():  # loop over the items 
-            print(f"{n}:{p}")  # prints pairs of names and prices
+        elif(selection ==2): # this takes use VIP options 
 
+            print(selection, "was selected. Directing you to VIP prices...")
+            #print (soup2.prettify()) testing purposes 
+            prices = []
+            tags = soup2.find_all('div', class_='ticket-price-section')
+            for y in tags:
+                
+                price = float(y.get('data-price'))
+                prices.append(price)
 
-    else:
-        error_msg()  
+        # lines below takes the minimuma and maximum of both prices
+            VIP_reg = min(prices)
+            VIP_magnet = max(prices)
+
+            print(prices) # prints the list containing the prices for testing purposes
+
+            print("The price for VIP is: ", VIP_reg)
+            print("The price of VIP with the magnet is: ", VIP_magnet)
+            
+        elif(selection ==3): # this is for camping tickets 
+            #print("It works")    
+            print(selection, "was selected. Directing you to camping prices...")
+            tags_title = soup3.find_all('div', class_='ticket-price-section')
+            
+            # this line is for testing purposes -----------------------
+            price = soup3.find_all('div', class_= 'ticket-price-section')
+
+            prices = []
+            for p in price:
+                price = p.get('data-price')
+                prices.append(price)
+
+                print(price)
+
+            # end more tests ------------------------------------------------
+
+            names = []
+            for z in tags_title: 
+                name = z.get('data-name')
+                names.append(name)
+                #print(name.strip())  # strip() trims the whitespace 
+
+            # Match corresponding name with price. Let's use a dictionary (USE ZIP)
+            names_prices = dict(zip(names, prices))
+            for n, p in names_prices.items():  # loop over the items 
+                print(f"{n}:{p}")  # prints pairs of names and prices
+
+        else:
+            error_msg()  
 
     # --------------- we would end the while here ------------------
 
